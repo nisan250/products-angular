@@ -1,0 +1,26 @@
+thead {
+  color: #337AB7;
+}
+.row {
+  padding-bottom: 1.25rem;
+
+}
+
+@media (max-width: 767px) {
+  thead {
+    display: none;
+  }
+  tr {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #DFD7CA;
+    margin-top: 26px;
+  }
+  .imageBlock {
+    margin: auto;
+    border-top: none;
+  }
+
+}
+
+

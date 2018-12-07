@@ -1,0 +1,9 @@
+@media (max-width: 767px) {
+  .delete-button {
+    margin-top: 6px;
+  }
+  .add-tag-button{
+    margin-top: 26px;
+  }
+}
+

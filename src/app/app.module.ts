@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 // third party
 import { NgxLoadingModule } from 'ngx-loading';
@@ -18,6 +19,7 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     ProductModule,
     AppRoutingModule,
     NgxLoadingModule.forRoot({})

@@ -1,17 +1,27 @@
-<nav class='navbar navbar-expand navbar-light bg-light'>
-  <a class='navbar-brand'>{{title}}</a>
-  <ul class='navbar-nav'>
-    <li class='nav-item'><a class='nav-link' routerLinkActive='active'
-      [routerLink]="['/welcome']">Home</a>
-    </li>
-    <li class='nav-item'><a class='nav-link' routerLinkActive='active' [routerLinkActiveOptions]="{exact: true}"
-      [routerLink]="['/products']">Product List</a>
-    </li>
-    <li class='nav-item'><a class='nav-link' routerLinkActive='active' [routerLinkActiveOptions]="{exact: true}"
-      [routerLink]="['/products/0/edit']">Add Product</a>
-    </li>
-  </ul>
-</nav>
-<div class='container'>
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+  <a class="navbar-brand"  [routerLink]="['/']" [routerLinkActive]="['link-active']">{{title}}</a>
+
+
+
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse xnavbar-nav xnav" [ngClass]="{ 'show': navbarOpen }">
+    <ul class="navbar-nav mr-auto">
+      <li class='nav-item'><a class='nav-link' routerLinkActive='active'
+        [routerLink]="['/welcome']" (click)="toggleNavbar()">Home</a>
+      </li>
+      <li class='nav-item'><a class='nav-link' routerLinkActive='active' [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="['/products']" (click)="toggleNavbar()">Product List</a>
+      </li>
+      <li class='nav-item'><a class='nav-link' routerLinkActive='active' [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="['/products/0/edit']" (click)="toggleNavbar()">Add Product</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class='container content-with-fixed-top'>
   <router-outlet></router-outlet>
 </div>

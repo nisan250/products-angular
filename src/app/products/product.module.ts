@@ -1,28 +1,32 @@
 import { NgModule } from '@angular/core';
-
-// third party
-import { NgxLoadingModule } from 'ngx-loading';
-// -----------------
-
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ProductRoutingModule } from './product-routing.module';
-import { ProductListComponent } from './product-list.component';
-import { ProductDetailComponent } from './product-detail.component';
-import { ProductEditComponent } from './product-edit.component';
+import { SharedModule } from '../shared/shared.module';
+
+// Imports for loading & configuring the in-memory web api
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { ProductData } from './product-data';
+import {
+  ProductListComponent,
+  ProductDetailComponent,
+  ProductEditComponent,
+  ProductEditGuard
+} from './index';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
+  imports: [
+    SharedModule,
+    ReactiveFormsModule,
+    NgxLoadingModule.forRoot({}),
+    InMemoryWebApiModule.forRoot(ProductData),
+    ProductRoutingModule
+  ],
   declarations: [
     ProductListComponent,
     ProductDetailComponent,
     ProductEditComponent
-    ],
-  imports: [
-    ProductRoutingModule,
-    NgxLoadingModule.forRoot({})
   ]
 })
-
 export class ProductModule { }
-
-
-
-

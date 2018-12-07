@@ -1,0 +1,10 @@
+.crop {
+  overflow: hidden;
+}
+div {
+  cursor: pointer;
+}
+
+.fa-star {
+  color: gold;
+}

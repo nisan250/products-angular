@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'my-app';
+  title = 'Products-NG';
+  navbarOpen = false;
+  constructor() { }
+
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+  }
 }
