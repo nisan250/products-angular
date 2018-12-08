@@ -7,7 +7,7 @@ import { ProductEditGuard } from './product-edit.guard';
 
 const routes: Routes = [
   { path: 'products', component: ProductListComponent },
-  { path: 'productcs/:id', component: ProductDetailComponent },
+  { path: 'products/:id', component: ProductDetailComponent },
   {
     path: 'products/:id/edit',
     canDeactivate: [ProductEditGuard],

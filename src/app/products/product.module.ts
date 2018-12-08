@@ -4,9 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProductRoutingModule } from './product-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
-// Imports for loading & configuring the in-memory web api
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { ProductData } from './product-data';
+
 import {
   ProductListComponent,
   ProductDetailComponent,
@@ -20,7 +18,6 @@ import { NgxLoadingModule } from 'ngx-loading';
     SharedModule,
     ReactiveFormsModule,
     NgxLoadingModule.forRoot({}),
-    InMemoryWebApiModule.forRoot(ProductData),
     ProductRoutingModule
   ],
   declarations: [
