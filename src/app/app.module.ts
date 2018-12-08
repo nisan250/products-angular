@@ -13,10 +13,11 @@ import { PageNotFoundComponent } from './page-not-found.component';
 // Third Party
 import { NgxLoadingModule } from 'ngx-loading';
 
-// Feature
+// Feature Modules
 import { AppRoutingModule } from './app-routing.module';
 import { ProductModule } from './products/product.module';
-
+import { UserModule } from './user/user.module';
+import { MessageModule } from './messages/message.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,12 +26,13 @@ import { ProductModule } from './products/product.module';
   ],
   imports: [
     BrowserModule,
-    NgxLoadingModule.forRoot({}),
     HttpClientModule,
+    NgxLoadingModule.forRoot({}),
     InMemoryWebApiModule.forRoot(ProductData, { delay: 1000 } ),
+    UserModule,
     ProductModule,
+    MessageModule,
     AppRoutingModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]

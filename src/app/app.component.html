@@ -10,7 +10,7 @@
   <div class="collapse navbar-collapse xnavbar-nav xnav" [ngClass]="{ 'show': navbarOpen }">
     <ul class="navbar-nav mr-auto">
       <li class='nav-item'><a class='nav-link' routerLinkActive='active'
-        [routerLink]="['/welcome']" (click)="toggleNavbar()">Home</a>
+        [routerLink]="['/home']" (click)="toggleNavbar()">Home</a>
       </li>
       <li class='nav-item'><a class='nav-link' routerLinkActive='active' [routerLinkActiveOptions]="{exact: true}"
         [routerLink]="['/products']" (click)="toggleNavbar()">Product List</a>
@@ -19,6 +19,17 @@
         [routerLink]="['/products/0/edit']" (click)="toggleNavbar()">Add Product</a>
       </li>
     </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li class='nav-item' *ngIf="authService.isLoggedIn()"><!-- class='nav-item'-->
+          <a class='nav-link'>Welcome {{ authService.currentUser.userName }}</a><!--class='nav-link'-->
+        </li>
+        <li class='nav-item' *ngIf="!authService.isLoggedIn()">
+          <a class='nav-link' [routerLink]="['/login']" (click)="toggleNavbar()">Log In</a>
+        </li>
+        <li class='nav-item log-out-link' *ngIf="authService.isLoggedIn()">
+          <a class='nav-link' (click)="logOut()">Log Out</a>
+        </li>
+      </ul>
   </div>
 </div>
 
