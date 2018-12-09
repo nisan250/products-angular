@@ -33,6 +33,17 @@ module.exports = [[module.i, "@import url(\"https://fonts.googleapis.com/css?fam
 
 /***/ }),
 
+/***/ "./node_modules/@angular-devkit/build-angular/src/angular-cli-files/plugins/raw-css-loader.js!./node_modules/postcss-loader/src/index.js?!./src/css/route-animation.css":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@angular-devkit/build-angular/src/angular-cli-files/plugins/raw-css-loader.js!./node_modules/postcss-loader/src??embedded!./src/css/route-animation.css ***!
+  \******************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = [[module.i, "li {\r\n  font-size: large;\r\n}\r\n\r\ndiv.panel-heading {\r\n font-size: x-large;\r\n}\r\n\r\nli {\r\n  cursor: pointer;\r\n}\r\n\r\n/* Fade transition */\r\n\r\nwn-root div.animatedroute2 {\r\n  -webkit-animation-duration: .5s;\r\n          animation-duration: .5s;\r\n  opacity: 0;\r\n  -webkit-animation-name: fadeIn;\r\n          animation-name: fadeIn;\r\n  -webkit-animation-fill-mode: forwards;\r\n          animation-fill-mode: forwards;\r\n  transition: -webkit-transform .5s ease;\r\n  transition: transform .5s ease;\r\n  transition: transform .5s ease, -webkit-transform .5s ease;\r\n}\r\n\r\n@-webkit-keyframes fadeIn {\r\nfrom {\r\n  opacity: 0;\r\n}\r\n\r\nto {\r\n  opacity: 1;\r\n}\r\n}\r\n\r\n@keyframes fadeIn {\r\nfrom {\r\n  opacity: 0;\r\n}\r\n\r\nto {\r\n  opacity: 1;\r\n}\r\n}\r\n\r\n/* Slide transition */\r\n\r\nwn-root div.animatedroute {\r\n  -webkit-animation-duration: .5s;\r\n          animation-duration: .5s;\r\n  -webkit-animation-name: slideIn;\r\n          animation-name: slideIn;\r\n  -webkit-animation-fill-mode: forwards;\r\n          animation-fill-mode: forwards;\r\n  transition: -webkit-transform .5s ease;\r\n  transition: transform .5s ease;\r\n  transition: transform .5s ease, -webkit-transform .5s ease;\r\n}\r\n\r\n@-webkit-keyframes slideIn {\r\nfrom {\r\n  -webkit-transform: translate(-200px);\r\n          transform: translate(-200px);\r\n}\r\n\r\nto {\r\n  -webkit-transform: translate(0px);\r\n          transform: translate(0px);\r\n}\r\n}\r\n\r\n@keyframes slideIn {\r\nfrom {\r\n  -webkit-transform: translate(-200px);\r\n          transform: translate(-200px);\r\n}\r\n\r\nto {\r\n  -webkit-transform: translate(0px);\r\n          transform: translate(0px);\r\n}\r\n}\r\n\r\n/* Spinner */\r\n\r\n.spinner-bg {\r\n  background: #fafafa0d;\r\n}\r\n\r\n.fa.fa-spinner {\r\nfont-size: 42px;\r\nposition:absolute;\r\ntop: 50%;\r\nleft: 50%;\r\nz-index:10;\r\ncolor: #74726b\r\n}\r\n\r\n.fa-spinner {\r\n  -webkit-animation: spin 1000ms infinite linear;\r\n  animation: spin 1000ms infinite linear;\r\n}\r\n\r\n@-webkit-keyframes spin {\r\n  0% {\r\n      -webkit-transform: rotate(0deg);\r\n      transform: rotate(0deg);\r\n  }\r\n  100% {\r\n      -webkit-transform: rotate(359deg);\r\n      transform: rotate(359deg);\r\n  }\r\n}\r\n\r\n@keyframes spin {\r\n  0% {\r\n      -webkit-transform: rotate(0deg);\r\n      transform: rotate(0deg);\r\n  }\r\n  100% {\r\n      -webkit-transform: rotate(359deg);\r\n      transform: rotate(359deg);\r\n  }\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9jc3Mvcm91dGUtYW5pbWF0aW9uLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGlCQUFpQjtDQUNsQjs7QUFFRDtDQUNDLG1CQUFtQjtDQUNuQjs7QUFFRDtFQUNFLGdCQUFnQjtDQUNqQjs7QUFFRCxxQkFBcUI7O0FBQ3JCO0VBQ0UsZ0NBQXdCO1VBQXhCLHdCQUF3QjtFQUN4QixXQUFXO0VBQ1gsK0JBQXVCO1VBQXZCLHVCQUF1QjtFQUN2QixzQ0FBOEI7VUFBOUIsOEJBQThCO0VBQzlCLHVDQUErQjtFQUEvQiwrQkFBK0I7RUFBL0IsMkRBQStCO0NBQ2hDOztBQUVEO0FBQ0E7RUFDRSxXQUFXO0NBQ1o7O0FBRUQ7RUFDRSxXQUFXO0NBQ1o7Q0FDQTs7QUFSRDtBQUNBO0VBQ0UsV0FBVztDQUNaOztBQUVEO0VBQ0UsV0FBVztDQUNaO0NBQ0E7O0FBRUQsc0JBQXNCOztBQUN0QjtFQUNFLGdDQUF3QjtVQUF4Qix3QkFBd0I7RUFDeEIsZ0NBQXdCO1VBQXhCLHdCQUF3QjtFQUN4QixzQ0FBOEI7VUFBOUIsOEJBQThCO0VBQzlCLHVDQUErQjtFQUEvQiwrQkFBK0I7RUFBL0IsMkRBQStCO0NBQ2hDOztBQUVEO0FBQ0E7RUFDRSxxQ0FBNkI7VUFBN0IsNkJBQTZCO0NBQzlCOztBQUVEO0VBQ0Usa0NBQTBCO1VBQTFCLDBCQUEwQjtDQUMzQjtDQUNBOztBQVJEO0FBQ0E7RUFDRSxxQ0FBNkI7VUFBN0IsNkJBQTZCO0NBQzlCOztBQUVEO0VBQ0Usa0NBQTBCO1VBQTFCLDBCQUEwQjtDQUMzQjtDQUNBOztBQUVELGFBQWE7O0FBQ2I7RUFDRSxzQkFBc0I7Q0FDdkI7O0FBQ0Q7QUFDQSxnQkFBZ0I7QUFDaEIsa0JBQWtCO0FBQ2xCLFNBQVM7QUFDVCxVQUFVO0FBQ1YsV0FBVztBQUNYLGNBQWM7Q0FDYjs7QUFFRDtFQUNFLCtDQUErQztFQUMvQyx1Q0FBdUM7Q0FDeEM7O0FBQ0Q7RUFDRTtNQUNJLGdDQUFnQztNQUNoQyx3QkFBd0I7R0FDM0I7RUFDRDtNQUNJLGtDQUFrQztNQUNsQywwQkFBMEI7R0FDN0I7Q0FDRjs7QUFDRDtFQUNFO01BQ0ksZ0NBQWdDO01BQ2hDLHdCQUF3QjtHQUMzQjtFQUNEO01BQ0ksa0NBQWtDO01BQ2xDLDBCQUEwQjtHQUM3QjtDQUNGIiwiZmlsZSI6InNyYy9jc3Mvcm91dGUtYW5pbWF0aW9uLmNzcyIsInNvdXJjZXNDb250ZW50IjpbImxpIHtcclxuICBmb250LXNpemU6IGxhcmdlO1xyXG59XHJcblxyXG5kaXYucGFuZWwtaGVhZGluZyB7XHJcbiBmb250LXNpemU6IHgtbGFyZ2U7XHJcbn1cclxuXHJcbmxpIHtcclxuICBjdXJzb3I6IHBvaW50ZXI7XHJcbn1cclxuXHJcbi8qIEZhZGUgdHJhbnNpdGlvbiAqL1xyXG53bi1yb290IGRpdi5hbmltYXRlZHJvdXRlMiB7XHJcbiAgYW5pbWF0aW9uLWR1cmF0aW9uOiAuNXM7XHJcbiAgb3BhY2l0eTogMDtcclxuICBhbmltYXRpb24tbmFtZTogZmFkZUluO1xyXG4gIGFuaW1hdGlvbi1maWxsLW1vZGU6IGZvcndhcmRzO1xyXG4gIHRyYW5zaXRpb246IHRyYW5zZm9ybSAuNXMgZWFzZTtcclxufVxyXG5cclxuQGtleWZyYW1lcyBmYWRlSW4ge1xyXG5mcm9tIHtcclxuICBvcGFjaXR5OiAwO1xyXG59XHJcblxyXG50byB7XHJcbiAgb3BhY2l0eTogMTtcclxufVxyXG59XHJcblxyXG4vKiBTbGlkZSB0cmFuc2l0aW9uICovXHJcbnduLXJvb3QgZGl2LmFuaW1hdGVkcm91dGUge1xyXG4gIGFuaW1hdGlvbi1kdXJhdGlvbjogLjVzO1xyXG4gIGFuaW1hdGlvbi1uYW1lOiBzbGlkZUluO1xyXG4gIGFuaW1hdGlvbi1maWxsLW1vZGU6IGZvcndhcmRzO1xyXG4gIHRyYW5zaXRpb246IHRyYW5zZm9ybSAuNXMgZWFzZTtcclxufVxyXG5cclxuQGtleWZyYW1lcyBzbGlkZUluIHtcclxuZnJvbSB7XHJcbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTIwMHB4KTtcclxufVxyXG5cclxudG8ge1xyXG4gIHRyYW5zZm9ybTogdHJhbnNsYXRlKDBweCk7XHJcbn1cclxufVxyXG5cclxuLyogU3Bpbm5lciAqL1xyXG4uc3Bpbm5lci1iZyB7XHJcbiAgYmFja2dyb3VuZDogI2ZhZmFmYTBkO1xyXG59XHJcbi5mYS5mYS1zcGlubmVyIHtcclxuZm9udC1zaXplOiA0MnB4O1xyXG5wb3NpdGlvbjphYnNvbHV0ZTtcclxudG9wOiA1MCU7XHJcbmxlZnQ6IDUwJTtcclxuei1pbmRleDoxMDtcclxuY29sb3I6ICM3NDcyNmJcclxufVxyXG5cclxuLmZhLXNwaW5uZXIge1xyXG4gIC13ZWJraXQtYW5pbWF0aW9uOiBzcGluIDEwMDBtcyBpbmZpbml0ZSBsaW5lYXI7XHJcbiAgYW5pbWF0aW9uOiBzcGluIDEwMDBtcyBpbmZpbml0ZSBsaW5lYXI7XHJcbn1cclxuQC13ZWJraXQta2V5ZnJhbWVzIHNwaW4ge1xyXG4gIDAlIHtcclxuICAgICAgLXdlYmtpdC10cmFuc2Zvcm06IHJvdGF0ZSgwZGVnKTtcclxuICAgICAgdHJhbnNmb3JtOiByb3RhdGUoMGRlZyk7XHJcbiAgfVxyXG4gIDEwMCUge1xyXG4gICAgICAtd2Via2l0LXRyYW5zZm9ybTogcm90YXRlKDM1OWRlZyk7XHJcbiAgICAgIHRyYW5zZm9ybTogcm90YXRlKDM1OWRlZyk7XHJcbiAgfVxyXG59XHJcbkBrZXlmcmFtZXMgc3BpbiB7XHJcbiAgMCUge1xyXG4gICAgICAtd2Via2l0LXRyYW5zZm9ybTogcm90YXRlKDBkZWcpO1xyXG4gICAgICB0cmFuc2Zvcm06IHJvdGF0ZSgwZGVnKTtcclxuICB9XHJcbiAgMTAwJSB7XHJcbiAgICAgIC13ZWJraXQtdHJhbnNmb3JtOiByb3RhdGUoMzU5ZGVnKTtcclxuICAgICAgdHJhbnNmb3JtOiByb3RhdGUoMzU5ZGVnKTtcclxuICB9XHJcbn1cclxuIl19 */", '', '']]
+
+/***/ }),
+
 /***/ "./node_modules/font-awesome/scss/font-awesome.scss":
 /*!**********************************************************!*\
   !*** ./node_modules/font-awesome/scss/font-awesome.scss ***!
@@ -600,6 +611,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./src/css/route-animation.css":
+/*!*************************************!*\
+  !*** ./src/css/route-animation.css ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../node_modules/@angular-devkit/build-angular/src/angular-cli-files/plugins/raw-css-loader.js!../../node_modules/postcss-loader/src??embedded!./route-animation.css */ "./node_modules/@angular-devkit/build-angular/src/angular-cli-files/plugins/raw-css-loader.js!./node_modules/postcss-loader/src/index.js?!./src/css/route-animation.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./src/styles.scss":
 /*!*************************!*\
   !*** ./src/styles.scss ***!
@@ -631,14 +672,15 @@ if(false) {}
 /***/ }),
 
 /***/ 2:
-/*!***********************************************************************************************************!*\
-  !*** multi ./src/css/bootswatch.css ./src/styles.scss ./node_modules/font-awesome/scss/font-awesome.scss ***!
-  \***********************************************************************************************************/
+/*!*****************************************************************************************************************************************!*\
+  !*** multi ./src/css/bootswatch.css ./src/styles.scss ./src/css/route-animation.css ./node_modules/font-awesome/scss/font-awesome.scss ***!
+  \*****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! D:\apps\my-app\src\css\bootswatch.css */"./src/css/bootswatch.css");
 __webpack_require__(/*! D:\apps\my-app\src\styles.scss */"./src/styles.scss");
+__webpack_require__(/*! D:\apps\my-app\src\css\route-animation.css */"./src/css/route-animation.css");
 module.exports = __webpack_require__(/*! D:\apps\my-app\node_modules\font-awesome\scss\font-awesome.scss */"./node_modules/font-awesome/scss/font-awesome.scss");
 
 

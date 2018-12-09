@@ -30,6 +30,7 @@
             "styles": [
               "src/css/bootswatch.css",
               "src/styles.scss",
+              "src/css/route-animation.css",
               "./node_modules/font-awesome/scss/font-awesome.scss"
             ],
             "scripts": [],

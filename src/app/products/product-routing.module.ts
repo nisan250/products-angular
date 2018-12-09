@@ -7,18 +7,36 @@ import { ProductEditGuard } from './product-edit.guard';
 import { ProductResolverService } from './product-resolver.service';
 
 const routes: Routes = [
-  { path: 'products', component: ProductListComponent },
-  {
-    path: 'products/:id',
-    component: ProductDetailComponent,
-    resolve: { product: ProductResolverService}
-  },
-  {
-    path: 'products/:id/edit',
-    canDeactivate: [ProductEditGuard],
-    component: ProductEditComponent,
-    resolve: { product: ProductResolverService}
-  }
+{
+  path: 'products',
+  children: [
+    { path: '',
+      component: ProductListComponent },
+    {
+      path: ':id',
+      component: ProductDetailComponent,
+      resolve: { product: ProductResolverService}
+    },
+    {
+      path: ':id/edit',
+      canDeactivate: [ProductEditGuard],
+      component: ProductEditComponent,
+      resolve: { product: ProductResolverService}
+    }
+  ]
+}
+  // { path: 'products', component: ProductListComponent },
+  // {
+  //   path: 'products/:id',
+  //   component: ProductDetailComponent,
+  //   resolve: { product: ProductResolverService}
+  // },
+  // {
+  //   path: 'products/:id/edit',
+  //   canDeactivate: [ProductEditGuard],
+  //   component: ProductEditComponent,
+  //   resolve: { product: ProductResolverService}
+  // }
 ];
 
 

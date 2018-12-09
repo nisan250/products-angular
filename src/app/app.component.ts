@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from './user/auth.service';
-import { Router } from '@angular/router';
+import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
+import { BrowserPlatformLocation } from '@angular/platform-browser/src/browser/location/browser_platform_location';
 
 @Component({
   selector: 'wn-root',
@@ -10,8 +11,25 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'Products-NG';
   navbarOpen = false;
+  loading = true;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {
+    router.events.subscribe((routerEvent: Event) => {
+      this.handleRouterEvent(routerEvent);
+    });
+   }
+
+  handleRouterEvent(routerEvent: Event): void {
+    if (routerEvent instanceof NavigationStart) {
+      this.loading = true;
+    }
+
+    if (routerEvent instanceof NavigationEnd ||
+      routerEvent instanceof NavigationCancel ||
+      routerEvent instanceof NavigationError) {
+        this.loading = false;
+    }
+  }
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;

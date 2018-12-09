@@ -1,0 +1,86 @@
+li {
+  font-size: large;
+}
+
+div.panel-heading {
+ font-size: x-large;
+}
+
+li {
+  cursor: pointer;
+}
+
+/* Fade transition */
+wn-root div.animatedroute2 {
+  animation-duration: .5s;
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-fill-mode: forwards;
+  transition: transform .5s ease;
+}
+
+@keyframes fadeIn {
+from {
+  opacity: 0;
+}
+
+to {
+  opacity: 1;
+}
+}
+
+/* Slide transition */
+wn-root div.animatedroute {
+  animation-duration: .5s;
+  animation-name: slideIn;
+  animation-fill-mode: forwards;
+  transition: transform .5s ease;
+}
+
+@keyframes slideIn {
+from {
+  transform: translate(-200px);
+}
+
+to {
+  transform: translate(0px);
+}
+}
+
+/* Spinner */
+.spinner-bg {
+  background: #fafafa0d;
+}
+.fa.fa-spinner {
+font-size: 42px;
+position:absolute;
+top: 50%;
+left: 50%;
+z-index:10;
+color: #74726b
+}
+
+.fa-spinner {
+  -webkit-animation: spin 1000ms infinite linear;
+  animation: spin 1000ms infinite linear;
+}
+@-webkit-keyframes spin {
+  0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+  }
+}
