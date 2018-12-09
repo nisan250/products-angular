@@ -215,6 +215,6 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
   onSaveComplete(): void {
     // Reset the form to clear the flags
     this.productForm.reset();
-    this.router.navigate(['/products']);
+    this.router.navigate(['/products'], { queryParamsHandling: 'preserve' });
   }
 }
