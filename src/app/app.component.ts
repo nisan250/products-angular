@@ -21,6 +21,6 @@ export class AppComponent {
     this.authService.logout();
     this.router.navigateByUrl('/home');
     this.toggleNavbar();
-    console.log('Log out');
+    // console.log('Log out');
   }
 }

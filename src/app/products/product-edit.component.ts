@@ -87,24 +87,37 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
       imageUrl: ['', [Validators.required, Validators.pattern('.*\/.*.(png|jpg|svg)')]],
     });
 
-    // Read the product Id from the route parameter
-    this.sub = this.route.paramMap.subscribe(
-      params => {
-        const id = +params.get('id');
-        this.getProduct(id);
-      }
-    );
+
+    // Read the product Id from the route parameter - without resolve
+    // this.sub = this.route.paramMap.subscribe(
+    //   params => {
+    //     const id = +params.get('id');
+    //     this.getProduct(id);
+    //   }
+    // );
+
+
+    // with resolve - but not get updated when form change to new from edit (same page different segment url - ngOnInit)
+    // this.product = this.route.snapshot.data['product'];
+    // this.displayProduct(this.product);
+
+    // with resolve - using observable
+    this.route.data.subscribe(
+      data => {
+        this.product = data['product'];
+        this.displayProduct(this.product);
+      });
 
     this.productForm.get('imageUrl').valueChanges.subscribe(
       value => {
         this.imgSrc = value;
-        console.log(value);
+        // console.log(value);
       }
     );
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -129,18 +142,18 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
     this.tags.markAsDirty();
   }
 
-  getProduct(id: number): void {
-    this.loading = true;
-    this.productService.getProduct(id)
-      .subscribe(
-        (product: Product) => {
-          this.loading = false;
-          console.log('nisan', product);
-          return this.displayProduct(product);
-        },
-        (error: any) => this.errorMessage = <any>error
-      );
-  }
+  // getProduct(id: number): void {
+  //   this.loading = true;
+  //   this.productService.getProduct(id)
+  //     .subscribe(
+  //       (product: Product) => {
+  //         this.loading = false;
+  //         console.log('nisan', product);
+  //         return this.displayProduct(product);
+  //       },
+  //       (error: any) => this.errorMessage = <any>error
+  //     );
+  // }
 
   displayProduct(product: Product): void {
     if (this.productForm) {

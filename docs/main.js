@@ -130,7 +130,7 @@ var AppComponent = /** @class */ (function () {
         this.authService.logout();
         this.router.navigateByUrl('/home');
         this.toggleNavbar();
-        console.log('Log out');
+        // console.log('Log out');
     };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -459,7 +459,7 @@ var PageNotFoundComponent = /** @class */ (function () {
 /*!***********************************!*\
   !*** ./src/app/products/index.ts ***!
   \***********************************/
-/*! exports provided: ProductListComponent, ProductDetailComponent, ProductEditComponent, ProductEditGuard */
+/*! exports provided: ProductListComponent, ProductDetailComponent, ProductEditComponent, ProductEditGuard, ProductResolverService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -475,6 +475,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _product_edit_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./product-edit.guard */ "./src/app/products/product-edit.guard.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ProductEditGuard", function() { return _product_edit_guard__WEBPACK_IMPORTED_MODULE_3__["ProductEditGuard"]; });
+
+/* harmony import */ var _product_resolver_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./product-resolver.service */ "./src/app/products/product-resolver.service.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ProductResolverService", function() { return _product_resolver_service__WEBPACK_IMPORTED_MODULE_4__["ProductResolverService"]; });
+
 
 
 
@@ -595,7 +599,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductDetailComponent", function() { return ProductDetailComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./product.service */ "./src/app/products/product.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -607,26 +610,32 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-
+// import { ProductService } from './product.service';
 var ProductDetailComponent = /** @class */ (function () {
-    function ProductDetailComponent(route, router, productService) {
+    function ProductDetailComponent(route, router) {
         this.route = route;
         this.router = router;
-        this.productService = productService;
         this.pageTitle = 'Product Detail';
         this.errorMessage = '';
     }
     ProductDetailComponent.prototype.ngOnInit = function () {
-        var param = this.route.snapshot.paramMap.get('id');
+        // get data  from a resolve on the route
+        this.product = this.route.snapshot.data['product'];
+        /* without the resolver
+        const param = this.route.snapshot.paramMap.get('id');
         if (param) {
-            var id = +param;
-            this.getProduct(id);
+          const id = +param;
+          this.getProduct(id);
         }
+        */
     };
-    ProductDetailComponent.prototype.getProduct = function (id) {
-        var _this = this;
-        this.productService.getProduct(id).subscribe(function (product) { return _this.product = product; }, function (error) { return _this.errorMessage = error; });
-    };
+    /* without the resolver
+      getProduct(id: number) {
+      this.productService.getProduct(id).subscribe(
+        product => this.product = product,
+        error => this.errorMessage = <any>error);
+    }
+    */
     ProductDetailComponent.prototype.onBack = function () {
         this.router.navigate(['/products']);
     };
@@ -635,9 +644,7 @@ var ProductDetailComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./product-detail.component.html */ "./src/app/products/product-detail.component.html"),
             styles: [__webpack_require__(/*! ./product-detail.component.css */ "./src/app/products/product-detail.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
-            _product_service__WEBPACK_IMPORTED_MODULE_2__["ProductService"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], ProductDetailComponent);
     return ProductDetailComponent;
 }());
@@ -776,18 +783,28 @@ var ProductEditComponent = /** @class */ (function () {
             releaseDate: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].pattern("^[0-9]{2}[/][0-9]{2}[/][0-9]{4}$")]],
             imageUrl: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].pattern('.*\/.*.(png|jpg|svg)')]],
         });
-        // Read the product Id from the route parameter
-        this.sub = this.route.paramMap.subscribe(function (params) {
-            var id = +params.get('id');
-            _this.getProduct(id);
+        // Read the product Id from the route parameter - without resolve
+        // this.sub = this.route.paramMap.subscribe(
+        //   params => {
+        //     const id = +params.get('id');
+        //     this.getProduct(id);
+        //   }
+        // );
+        // with resolve - but not get updated when form change to new from edit (same page different segment url - ngOnInit)
+        // this.product = this.route.snapshot.data['product'];
+        // this.displayProduct(this.product);
+        // with resolve - using observable
+        this.route.data.subscribe(function (data) {
+            _this.product = data['product'];
+            _this.displayProduct(_this.product);
         });
         this.productForm.get('imageUrl').valueChanges.subscribe(function (value) {
             _this.imgSrc = value;
-            console.log(value);
+            // console.log(value);
         });
     };
     ProductEditComponent.prototype.ngOnDestroy = function () {
-        this.sub.unsubscribe();
+        // this.sub.unsubscribe();
     };
     ProductEditComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
@@ -806,16 +823,18 @@ var ProductEditComponent = /** @class */ (function () {
         this.tags.removeAt(index);
         this.tags.markAsDirty();
     };
-    ProductEditComponent.prototype.getProduct = function (id) {
-        var _this = this;
-        this.loading = true;
-        this.productService.getProduct(id)
-            .subscribe(function (product) {
-            _this.loading = false;
-            console.log('nisan', product);
-            return _this.displayProduct(product);
-        }, function (error) { return _this.errorMessage = error; });
-    };
+    // getProduct(id: number): void {
+    //   this.loading = true;
+    //   this.productService.getProduct(id)
+    //     .subscribe(
+    //       (product: Product) => {
+    //         this.loading = false;
+    //         console.log('nisan', product);
+    //         return this.displayProduct(product);
+    //       },
+    //       (error: any) => this.errorMessage = <any>error
+    //     );
+    // }
     ProductEditComponent.prototype.displayProduct = function (product) {
         if (this.productForm) {
             this.productForm.reset();
@@ -1050,6 +1069,74 @@ var ProductListComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/products/product-resolver.service.ts":
+/*!******************************************************!*\
+  !*** ./src/app/products/product-resolver.service.ts ***!
+  \******************************************************/
+/*! exports provided: ProductResolverService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductResolverService", function() { return ProductResolverService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./product.service */ "./src/app/products/product.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+// import { map, catchError } from 'rxjs/operators';
+
+var ProductResolverService = /** @class */ (function () {
+    function ProductResolverService(productService, router) {
+        this.productService = productService;
+        this.router = router;
+    }
+    ProductResolverService.prototype.resolve = function (route, state) {
+        var id = +route.params['id'];
+        return this.productService.getProduct(id);
+        // const id = route.params['id'];
+        // if (isNaN(id)) {
+        //   console.log(`product id is not a number: ${id}`);
+        //   this.router.navigate(['/products']);
+        //   return of(null);
+        // }
+        // return this.productService.getProduct(+id)
+        //   .pipe(map(product => {
+        //     if (product) {
+        //       return product;
+        //     }
+        //     console.log(`product not found: ${id}`);
+        //     this.router.navigate(['/products']);
+        //     return null;
+        //   }))
+        //   .pipe(catchError(error => {
+        //     console.log(`rerieval error: ${error}`);
+        //     this.router.navigate(['/products']);
+        //     return Observable.of(null);
+        //   }));
+    };
+    ProductResolverService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_product_service__WEBPACK_IMPORTED_MODULE_2__["ProductService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+    ], ProductResolverService);
+    return ProductResolverService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/products/product-routing.module.ts":
 /*!****************************************************!*\
   !*** ./src/app/products/product-routing.module.ts ***!
@@ -1066,6 +1153,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _product_detail_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./product-detail.component */ "./src/app/products/product-detail.component.ts");
 /* harmony import */ var _product_edit_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./product-edit.component */ "./src/app/products/product-edit.component.ts");
 /* harmony import */ var _product_edit_guard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./product-edit.guard */ "./src/app/products/product-edit.guard.ts");
+/* harmony import */ var _product_resolver_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./product-resolver.service */ "./src/app/products/product-resolver.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1078,13 +1166,19 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
     { path: 'products', component: _product_list_component__WEBPACK_IMPORTED_MODULE_2__["ProductListComponent"] },
-    { path: 'products/:id', component: _product_detail_component__WEBPACK_IMPORTED_MODULE_3__["ProductDetailComponent"] },
+    {
+        path: 'products/:id',
+        component: _product_detail_component__WEBPACK_IMPORTED_MODULE_3__["ProductDetailComponent"],
+        resolve: { product: _product_resolver_service__WEBPACK_IMPORTED_MODULE_6__["ProductResolverService"] }
+    },
     {
         path: 'products/:id/edit',
         canDeactivate: [_product_edit_guard__WEBPACK_IMPORTED_MODULE_5__["ProductEditGuard"]],
-        component: _product_edit_component__WEBPACK_IMPORTED_MODULE_4__["ProductEditComponent"]
+        component: _product_edit_component__WEBPACK_IMPORTED_MODULE_4__["ProductEditComponent"],
+        resolve: { product: _product_resolver_service__WEBPACK_IMPORTED_MODULE_6__["ProductResolverService"] }
     }
 ];
 var ProductRoutingModule = /** @class */ (function () {
@@ -1129,6 +1223,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+// import { ProductResolverService } from './product-resolver.service';
 
 
 var ProductModule = /** @class */ (function () {
@@ -1146,7 +1241,8 @@ var ProductModule = /** @class */ (function () {
                 _index__WEBPACK_IMPORTED_MODULE_4__["ProductListComponent"],
                 _index__WEBPACK_IMPORTED_MODULE_4__["ProductDetailComponent"],
                 _index__WEBPACK_IMPORTED_MODULE_4__["ProductEditComponent"]
-            ]
+            ],
+            providers: [_index__WEBPACK_IMPORTED_MODULE_4__["ProductResolverService"]]
         })
     ], ProductModule);
     return ProductModule;
@@ -1649,7 +1745,6 @@ var LoginComponent = /** @class */ (function () {
     LoginComponent.prototype.ngOnInit = function () {
     };
     LoginComponent.prototype.login = function (loginForm) {
-        console.log('ss');
         if (loginForm && loginForm.valid) {
             var userName = loginForm.form.value.userName;
             var password = loginForm.form.value.password;

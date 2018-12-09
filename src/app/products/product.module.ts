@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductRoutingModule } from './product-routing.module';
 import { SharedModule } from '../shared/shared.module';
-
+// import { ProductResolverService } from './product-resolver.service';
 
 import {
   ProductListComponent,
   ProductDetailComponent,
   ProductEditComponent,
-  ProductEditGuard
+  ProductEditGuard,
+  ProductResolverService
 } from './index';
 import { NgxLoadingModule } from 'ngx-loading';
 
@@ -23,6 +24,7 @@ import { NgxLoadingModule } from 'ngx-loading';
     ProductListComponent,
     ProductDetailComponent,
     ProductEditComponent
-  ]
+  ],
+  providers: [ProductResolverService]
 })
 export class ProductModule { }

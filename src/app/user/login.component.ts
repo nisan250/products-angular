@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
 
 
   login(loginForm: NgForm) {
-    console.log('ss');
       if (loginForm && loginForm.valid) {
           const userName = loginForm.form.value.userName;
           const password = loginForm.form.value.password;
