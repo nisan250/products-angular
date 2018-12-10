@@ -62,7 +62,9 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 var routes = [
-    { path: 'products', canActivate: [_user_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]], loadChildren: 'src/app/products/product.module#ProductModule' },
+    // { path: 'products', canActivate: [ AuthGuardService ], loadChildren: 'src/app/products/product.module#ProductModule'},
+    // require the log-in before loading the product module.
+    { path: 'products', canLoad: [_user_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]], loadChildren: 'src/app/products/product.module#ProductModule' },
     { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_2__["HomeComponent"] },
     // path: 'user', loadChildren: './user/user.module#UserModule'
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -925,6 +927,9 @@ var AuthGuardService = /** @class */ (function () {
     }
     AuthGuardService.prototype.canActivate = function (route, state) {
         return this.checkLoggedIn(state.url);
+    };
+    AuthGuardService.prototype.canLoad = function (route) {
+        return this.checkLoggedIn(route.path);
     };
     AuthGuardService.prototype.checkLoggedIn = function (url) {
         if (this.authService.isLoggedIn()) {
