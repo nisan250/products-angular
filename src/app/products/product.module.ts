@@ -8,8 +8,8 @@ import {
   ProductListComponent,
   ProductDetailComponent,
   ProductEditComponent,
-  ProductEditGuard,
-  ProductResolverService
+  ProductResolverService,
+  ProductEditGuard
 } from './index';
 import { NgxLoadingModule } from 'ngx-loading';
 
@@ -25,6 +25,6 @@ import { NgxLoadingModule } from 'ngx-loading';
     ProductDetailComponent,
     ProductEditComponent
   ],
-  providers: [ProductResolverService]
+  providers: [ProductResolverService, ProductEditGuard]
 })
 export class ProductModule { }

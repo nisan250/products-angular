@@ -1169,6 +1169,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _product_edit_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./product-edit.component */ "./src/app/products/product-edit.component.ts");
 /* harmony import */ var _product_edit_guard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./product-edit.guard */ "./src/app/products/product-edit.guard.ts");
 /* harmony import */ var _product_resolver_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./product-resolver.service */ "./src/app/products/product-resolver.service.ts");
+/* harmony import */ var _user_auth_guard_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../user/auth-guard.service */ "./src/app/user/auth-guard.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1182,9 +1183,11 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
     {
         path: 'products',
+        canActivate: [_user_auth_guard_service__WEBPACK_IMPORTED_MODULE_7__["AuthGuardService"]],
         children: [
             { path: '',
                 component: _product_list_component__WEBPACK_IMPORTED_MODULE_2__["ProductListComponent"] },
@@ -1275,7 +1278,7 @@ var ProductModule = /** @class */ (function () {
                 _index__WEBPACK_IMPORTED_MODULE_4__["ProductDetailComponent"],
                 _index__WEBPACK_IMPORTED_MODULE_4__["ProductEditComponent"]
             ],
-            providers: [_index__WEBPACK_IMPORTED_MODULE_4__["ProductResolverService"]]
+            providers: [_index__WEBPACK_IMPORTED_MODULE_4__["ProductResolverService"], _index__WEBPACK_IMPORTED_MODULE_4__["ProductEditGuard"]]
         })
     ], ProductModule);
     return ProductModule;
@@ -1655,6 +1658,60 @@ var StarComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/user/auth-guard.service.ts":
+/*!********************************************!*\
+  !*** ./src/app/user/auth-guard.service.ts ***!
+  \********************************************/
+/*! exports provided: AuthGuardService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuardService", function() { return AuthGuardService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth.service */ "./src/app/user/auth.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var AuthGuardService = /** @class */ (function () {
+    function AuthGuardService(authService, router) {
+        this.authService = authService;
+        this.router = router;
+    }
+    AuthGuardService.prototype.canActivate = function (route, state) {
+        return this.checkLoggedIn(state.url);
+    };
+    AuthGuardService.prototype.checkLoggedIn = function (url) {
+        if (this.authService.isLoggedIn()) {
+            return true;
+        }
+        this.authService.redirectUrl = url;
+        this.router.navigate(['/login']);
+        return false;
+    };
+    AuthGuardService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+    ], AuthGuardService);
+    return AuthGuardService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/user/auth.service.ts":
 /*!**************************************!*\
   !*** ./src/app/user/auth.service.ts ***!
@@ -1782,7 +1839,13 @@ var LoginComponent = /** @class */ (function () {
             var userName = loginForm.form.value.userName;
             var password = loginForm.form.value.password;
             this.authService.login(userName, password);
-            this.router.navigate(['/products']);
+            // this.router.navigate(['/products']);
+            if (this.authService.redirectUrl) {
+                this.router.navigateByUrl(this.authService.redirectUrl);
+            }
+            else {
+                this.router.navigate(['/products']);
+            }
         }
         else {
             this.errorMessage = 'Please enter a user name and password.';
@@ -1857,14 +1920,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _login_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./login.component */ "./src/app/user/login.component.ts");
 /* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./auth.service */ "./src/app/user/auth.service.ts");
-/* harmony import */ var _user_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user-routing.module */ "./src/app/user/user-routing.module.ts");
-/* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/shared.module */ "./src/app/shared/shared.module.ts");
+/* harmony import */ var _auth_guard_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./auth-guard.service */ "./src/app/user/auth-guard.service.ts");
+/* harmony import */ var _user_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./user-routing.module */ "./src/app/user/user-routing.module.ts");
+/* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/shared.module */ "./src/app/shared/shared.module.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1881,11 +1946,12 @@ var UserModule = /** @class */ (function () {
             ],
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
-                _shared_shared_module__WEBPACK_IMPORTED_MODULE_5__["SharedModule"],
-                _user_routing_module__WEBPACK_IMPORTED_MODULE_4__["UserRoutingModule"]
+                _shared_shared_module__WEBPACK_IMPORTED_MODULE_6__["SharedModule"],
+                _user_routing_module__WEBPACK_IMPORTED_MODULE_5__["UserRoutingModule"]
             ],
             providers: [
-                _auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]
+                _auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"],
+                _auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]
             ]
         })
     ], UserModule);

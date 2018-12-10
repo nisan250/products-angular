@@ -8,6 +8,7 @@ import { MessageService } from '../messages/message.service';
 })
 export class AuthService {
   currentUser: IUser;
+  redirectUrl: string;
 
   constructor(private messageService: MessageService) { }
 
