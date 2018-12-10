@@ -64,11 +64,11 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var routes = [
     // { path: 'products', canActivate: [ AuthGuardService ], loadChildren: 'src/app/products/product.module#ProductModule'},
     // require the log-in before loading the product module.
-    { path: 'products', canLoad: [_user_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]], loadChildren: 'src/app/products/product.module#ProductModule' },
+    // { path: 'products', canLoad: [ AuthGuardService ], loadChildren: 'src/app/products/product.module#ProductModule'},
+    // again using canActivate coz canLoad blocks preload the module with PreloadAllModules (makes sense)
+    { path: 'products', canActivate: [_user_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]], loadChildren: 'src/app/products/product.module#ProductModule' },
     { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_2__["HomeComponent"] },
-    // path: 'user', loadChildren: './user/user.module#UserModule'
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    // { path: '**', redirectTo: 'home', pathMatch: 'full' },
     { path: '**', component: _page_not_found_component__WEBPACK_IMPORTED_MODULE_3__["PageNotFoundComponent"] },
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -76,7 +76,10 @@ var AppRoutingModule = /** @class */ (function () {
     }
     AppRoutingModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes, { enableTracing: true })],
+            imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes, {
+                    // enableTracing: true,
+                    preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_1__["PreloadAllModules"]
+                })],
             exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
         })
     ], AppRoutingModule);
