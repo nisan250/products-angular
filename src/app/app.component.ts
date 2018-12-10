@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from './user/auth.service';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { BrowserPlatformLocation } from '@angular/platform-browser/src/browser/location/browser_platform_location';
-
+import { MessageService } from './messages/message.service';
 @Component({
   selector: 'wn-root',
   templateUrl: './app.component.html',
@@ -13,7 +13,7 @@ export class AppComponent {
   navbarOpen = false;
   loading = true;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private messageService: MessageService) {
     router.events.subscribe((routerEvent: Event) => {
       this.handleRouterEvent(routerEvent);
     });
@@ -35,8 +35,23 @@ export class AppComponent {
     this.navbarOpen = !this.navbarOpen;
   }
 
+  displayMessages (): void {
+    console.log('display');
+    this.router.navigate([{ outlets: { popup: ['messages'] }}]);
+    this.messageService.isDisplayed = true;
+    this.toggleNavbar();
+  }
+  hideMessages (): void {
+    console.log('hide');
+    this.router.navigate([{ outlets: { popup: null }}]);
+    this.messageService.isDisplayed = false;
+    this.toggleNavbar();
+  }
+
   logOut(): void {
     this.authService.logout();
+    this.router.navigate([{ outlets: { popup: null }}]);
+    this.messageService.isDisplayed = false;
     this.router.navigateByUrl('/home');
     this.toggleNavbar();
     // console.log('Log out');

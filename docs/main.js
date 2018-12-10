@@ -76,7 +76,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"spinner-bg\" *ngIf=\"loading\">\n    <span class=\"fa fa-spinner\"></span>\n</div>\n<div class=\"navbar navbar-expand-lg fixed-top navbar-dark bg-primary\">\n  <a class=\"navbar-brand\"  [routerLink]=\"['/']\" >{{title}}</a><!--[routerLinkActive]=\"['link-active']\"-->\n\n\n  <button class=\"navbar-toggler\" type=\"button\" (click)=\"toggleNavbar()\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse xnavbar-nav xnav\" [ngClass]=\"{ 'show': navbarOpen }\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class='nav-item'><a class='nav-link' routerLinkActive='active'\n        [routerLink]=\"['/home']\" (click)=\"toggleNavbar()\">Home</a>\n      </li>\n      <li class='nav-item'><a class='nav-link' routerLinkActive='active' [routerLinkActiveOptions]=\"{exact: true}\"\n        [routerLink]=\"['/products']\" (click)=\"toggleNavbar()\">Product List</a>\n      </li>\n      <li class='nav-item'><a class='nav-link' routerLinkActive='active'\n        [routerLink]=\"['/products/0/edit']\" (click)=\"toggleNavbar()\">Add Product</a>\n      </li>\n    </ul>\n    <ul class=\"nav navbar-nav navbar-right\">\n        <li class='nav-item' *ngIf=\"authService.isLoggedIn()\"><!-- class='nav-item'-->\n          <a class='nav-link'>Welcome {{ authService.currentUser.userName }}</a><!--class='nav-link'-->\n        </li>\n        <li class='nav-item' *ngIf=\"!authService.isLoggedIn()\">\n          <a class='nav-link' routerLinkActive='active' [routerLink]=\"['/login']\" (click)=\"toggleNavbar()\">Log In</a>\n        </li>\n        <li class='nav-item log-out-link' *ngIf=\"authService.isLoggedIn()\">\n          <a class='nav-link' (click)=\"logOut()\">Log Out</a>\n        </li>\n      </ul>\n  </div>\n</div>\n\n<div class='container content-with-fixed-top'>\n  <router-outlet></router-outlet>\n</div>\n"
+module.exports = "<div class=\"spinner-bg\" *ngIf=\"loading\">\n    <span class=\"fa fa-spinner\"></span>\n</div>\n<div class=\"navbar navbar-expand-lg fixed-top navbar-dark bg-primary animatedroute2\">\n  <div class=\"navbar-brand\">{{title}}</div><!--[routerLink]=\"['/']\" [routerLinkActive]=\"['link-active']\"-->\n\n  <button class=\"navbar-toggler\" type=\"button\" (click)=\"toggleNavbar()\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse xnavbar-nav xnav\" [ngClass]=\"{ 'show': navbarOpen }\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class='nav-item welcome-user' *ngIf=\"authService.isLoggedIn()\" class=\"d-lg-none\">\n        <a class='nav-link welcome-mobile'>Welcome {{ authService.currentUser.userName }}</a>\n      </li>\n      <li class='nav-item'><a class='nav-link' routerLinkActive='active'\n        [routerLink]=\"['/home']\" (click)=\"toggleNavbar()\">Home</a>\n      </li>\n      <li class='nav-item'><a class='nav-link' routerLinkActive='active' [routerLinkActiveOptions]=\"{exact: true}\"\n        [routerLink]=\"['/products']\" (click)=\"toggleNavbar()\">Product List</a>\n      </li>\n      <li class='nav-item'><a class='nav-link' routerLinkActive='active'\n        [routerLink]=\"['/products/0/edit']\" (click)=\"toggleNavbar()\">Add Product</a>\n      </li>\n    </ul>\n    <ul class=\"nav navbar-nav navbar-right\">\n        <li class='nav-item welcome-user d-none d-lg-block' *ngIf=\"authService.isLoggedIn()\">\n          <a class='nav-link'>Welcome {{ authService.currentUser.userName }}</a>\n        </li>\n        <li class='nav-item'>\n            <a class='nav-link' *ngIf=\"!messageService.isDisplayed\" (click)=\"displayMessages()\">Show Messages</a><!--[routerLink]=\"[{ outlets: { popup: ['messages'] }}]\"-->\n        </li>\n        <li class='nav-item'>\n            <a class='nav-link' *ngIf=\"messageService.isDisplayed\" (click)=\"hideMessages()\">Hide Messages</a>\n        </li>\n        <li class='nav-item' *ngIf=\"!authService.isLoggedIn()\">\n          <a class='nav-link' routerLinkActive='active' [routerLink]=\"['/login']\" (click)=\"toggleNavbar()\">Log In</a>\n        </li>\n        <li class='nav-item log-out-link' *ngIf=\"authService.isLoggedIn()\">\n          <a class='nav-link' (click)=\"logOut()\">Log Out</a>\n        </li>\n      </ul>\n  </div>\n</div>\n\n<div class='container content-with-fixed-top'>\n  <div class=\"row routes-wrapper\">\n      <div class=\"primary-route flex-fill\">\n          <router-outlet></router-outlet>\n        </div>\n        <div class=\"secondary-route\">\n            <router-outlet name=\"popup\"></router-outlet>\n        </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -87,7 +87,7 @@ module.exports = "<div class=\"spinner-bg\" *ngIf=\"loading\">\n    <span class=
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".nav-link {\n  font-size: 14px; }\n\n.navbar-brand {\n  font-size: 21px; }\n\n.content-with-fixed-top {\n  padding-top: 90px; }\n\n.log-out-link {\n  cursor: pointer; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvRDpcXGFwcHNcXG15LWFwcC9zcmNcXGFwcFxcYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsZ0JBQWUsRUFDaEI7O0FBQ0Q7RUFDRSxnQkFBZSxFQUNoQjs7QUFDRDtFQUNFLGtCQUFpQixFQUNsQjs7QUFDRDtFQUNFLGdCQUFlLEVBQ2hCIiwiZmlsZSI6InNyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm5hdi1saW5rIHtcclxuICBmb250LXNpemU6IDE0cHg7XHJcbn1cclxuLm5hdmJhci1icmFuZHtcclxuICBmb250LXNpemU6IDIxcHg7XHJcbn1cclxuLmNvbnRlbnQtd2l0aC1maXhlZC10b3Age1xyXG4gIHBhZGRpbmctdG9wOiA5MHB4O1xyXG59XHJcbi5sb2ctb3V0LWxpbmsge1xyXG4gIGN1cnNvcjogcG9pbnRlcjtcclxufVxyXG5cclxuIl19 */"
+module.exports = ".nav-link {\n  font-size: 14px; }\n\n.navbar-brand {\n  font-size: 21px; }\n\n.content-with-fixed-top {\n  padding-top: 90px; }\n\n.log-out-link {\n  cursor: pointer; }\n\n.welcome-user .nav-link {\n  cursor: default;\n  color: #63ad5a; }\n\n.welcome-user .nav-link:hover {\n    color: #63ad5a; }\n\n.nav-link.welcome-mobile {\n  text-align: center;\n  color: #63ad5a; }\n\n.nav-link.welcome-mobile:hover {\n    color: #63ad5a;\n    cursor: default; }\n\n.primary-route {\n  padding: 0 10px; }\n\n.secondary-route {\n  margin-bottom: 10px;\n  padding: 0 10px; }\n\n@media (max-width: 991px) {\n  .routes-wrapper {\n    flex-direction: column-reverse !important; } }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvRDpcXGFwcHNcXG15LWFwcC9zcmNcXGFwcFxcYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsZ0JBQWUsRUFDaEI7O0FBQ0Q7RUFDRSxnQkFBZSxFQUNoQjs7QUFDRDtFQUNFLGtCQUFpQixFQUNsQjs7QUFDRDtFQUNFLGdCQUFlLEVBQ2hCOztBQUVEO0VBRUksZ0JBQWU7RUFDZixlQUFjLEVBSWY7O0FBUEg7SUFLTSxlQUFjLEVBQ2Y7O0FBSUw7RUFDRSxtQkFBa0I7RUFDbEIsZUFBYyxFQU1mOztBQVJEO0lBS0ksZUFBYztJQUNkLGdCQUFlLEVBQ2hCOztBQUdIO0VBQ0UsZ0JBQWUsRUFDaEI7O0FBQ0Q7RUFDRSxvQkFBbUI7RUFDbkIsZ0JBQWUsRUFDaEI7O0FBRUQ7RUFDRTtJQUNFLDBDQUF5QyxFQUMxQyxFQUFBIiwiZmlsZSI6InNyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm5hdi1saW5rIHtcclxuICBmb250LXNpemU6IDE0cHg7XHJcbn1cclxuLm5hdmJhci1icmFuZHtcclxuICBmb250LXNpemU6IDIxcHg7XHJcbn1cclxuLmNvbnRlbnQtd2l0aC1maXhlZC10b3Age1xyXG4gIHBhZGRpbmctdG9wOiA5MHB4O1xyXG59XHJcbi5sb2ctb3V0LWxpbmsge1xyXG4gIGN1cnNvcjogcG9pbnRlcjtcclxufVxyXG5cclxuLndlbGNvbWUtdXNlciB7XHJcbiAgLm5hdi1saW5rIHtcclxuICAgIGN1cnNvcjogZGVmYXVsdDtcclxuICAgIGNvbG9yOiAjNjNhZDVhO1xyXG4gICAgJjpob3ZlciB7XHJcbiAgICAgIGNvbG9yOiAjNjNhZDVhO1xyXG4gICAgfVxyXG4gIH1cclxufVxyXG5cclxuLm5hdi1saW5rLndlbGNvbWUtbW9iaWxlIHtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgY29sb3I6ICM2M2FkNWE7XHJcblxyXG4gICY6aG92ZXIge1xyXG4gICAgY29sb3I6ICM2M2FkNWE7XHJcbiAgICBjdXJzb3I6IGRlZmF1bHQ7XHJcbiAgfVxyXG59XHJcblxyXG4ucHJpbWFyeS1yb3V0ZXtcclxuICBwYWRkaW5nOiAwIDEwcHg7XHJcbn1cclxuLnNlY29uZGFyeS1yb3V0ZSB7XHJcbiAgbWFyZ2luLWJvdHRvbTogMTBweDtcclxuICBwYWRkaW5nOiAwIDEwcHg7XHJcbn1cclxuXHJcbkBtZWRpYSAobWF4LXdpZHRoOiA5OTFweCkge1xyXG4gIC5yb3V0ZXMtd3JhcHBlciB7XHJcbiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uLXJldmVyc2UgIWltcG9ydGFudDtcclxuICB9XHJcbn1cclxuLy8gLy8gLmZsZXgtcm91dGVzLWxheW91dCB7XHJcbi8vIC8vICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbi1yZXZlcnNlO1xyXG4vLyAvLyB9XHJcbi8vIEBtZWRpYSAobWF4LXdpZHRoOiA3NjhweCkge1xyXG4vLyAgIC8vIC5mbGV4LXJvdyB7XHJcbi8vICAgLy8gICBmbGV4LWRpcmVjdGlvbjogY29sdW1uICFpbXBvcnRhbnQ7XHJcbi8vICAgLy8gfVxyXG4vLyAgIC8vIC5mbGV4LXJvdy1jaGlsZCB7XHJcbi8vICAgLy8gICB3aWR0aDogMTAwJTtcclxuLy8gICAvLyB9XHJcbi8vIC8vIC5mbGV4LXJvdXRlcy1sYXlvdXQge1xyXG4vLyAvLyAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW4tcmV2ZXJzZTtcclxuXHJcbi8vIC8vICAgLmZsZXgtcm91dGVzLWxheW91dC1jaGlsZCB7XHJcbi8vIC8vICAgICBmbGV4OiAxO1xyXG4vLyAvLyAgICAgbWF4LXdpZHRoOiAxMDAlO1xyXG5cclxuLy8gLy8gICAgICAgJjpsYXN0LWNoaWxkIHtcclxuLy8gLy8gICAgICAgICBtYXJnaW46IDEwcHggMDtcclxuLy8gLy8gICAgICAgfVxyXG4vLyAvLyAgICAgfVxyXG4vLyAvLyAgIH1cclxuXHJcbi8vIC8vICAgLmZsZXgtcm91dGVzLWxheW91dC1jaGlsZDpsYXN0LWNoaWxkIHtcclxuLy8gLy8gICAgIG1hcmdpbjogMCAwIDE2cHggMDtcclxuLy8gLy8gICB9XHJcbi8vIH1cclxuIl19 */"
 
 /***/ }),
 
@@ -104,6 +104,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _user_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user/auth.service */ "./src/app/user/auth.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _messages_message_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./messages/message.service */ "./src/app/messages/message.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -116,11 +117,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(authService, router) {
+    function AppComponent(authService, router, messageService) {
         var _this = this;
         this.authService = authService;
         this.router = router;
+        this.messageService = messageService;
         this.title = 'Products-NG';
         this.navbarOpen = false;
         this.loading = true;
@@ -141,8 +144,22 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.toggleNavbar = function () {
         this.navbarOpen = !this.navbarOpen;
     };
+    AppComponent.prototype.displayMessages = function () {
+        console.log('display');
+        this.router.navigate([{ outlets: { popup: ['messages'] } }]);
+        this.messageService.isDisplayed = true;
+        this.toggleNavbar();
+    };
+    AppComponent.prototype.hideMessages = function () {
+        console.log('hide');
+        this.router.navigate([{ outlets: { popup: null } }]);
+        this.messageService.isDisplayed = false;
+        this.toggleNavbar();
+    };
     AppComponent.prototype.logOut = function () {
         this.authService.logout();
+        this.router.navigate([{ outlets: { popup: null } }]);
+        this.messageService.isDisplayed = false;
         this.router.navigateByUrl('/home');
         this.toggleNavbar();
         // console.log('Log out');
@@ -153,7 +170,7 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")]
         }),
-        __metadata("design:paramtypes", [_user_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+        __metadata("design:paramtypes", [_user_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _messages_message_service__WEBPACK_IMPORTED_MODULE_3__["MessageService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -245,7 +262,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"animatedroute2\">\n    <!-- <ngx-loading [show]=\"loading\" [config]=\"{ backDropBorderRadius: '14px'}\"></ngx-loading> -->\n    <div class=\"card\">\n        <div class=\"card-header\">\n          {{pageTitle}}\n        </div>\n        <div class=\"card-body\">\n          <div class=\"container-fluid\">\n            <div class=\"text-center\">\n              <img src=\"./assets/images/logo-cut.png\"\n                   class=\"img-responsive center-block\"\n                   style=\"padding-bottom:50px\" />\n            </div>\n\n            <div class=\"text-center\">Developed by:</div>\n            <div class=\"text-center\">\n              <h3>Nisan Sabag</h3>\n            </div>\n\n            <div class=\"text-center\">\n              <a href=\"https://github.com/nisan250/\">www.github.com/nisan250/</a>\n            </div>\n          </div>\n        </div>\n      </div>\n</div>\n\n"
+module.exports = "<div class=\"animatedroute\">\n    <!-- <ngx-loading [show]=\"loading\" [config]=\"{ backDropBorderRadius: '14px'}\"></ngx-loading> -->\n    <div class=\"card\">\n        <div class=\"card-header\">\n          {{pageTitle}}\n        </div>\n        <div class=\"card-body\">\n          <div class=\"container-fluid\">\n            <div class=\"text-center\">\n              <img src=\"./assets/images/logo-cut.png\"\n                   class=\"img-responsive center-block\"\n                   style=\"padding-bottom:50px\" />\n            </div>\n\n            <div class=\"text-center\">Developed by:</div>\n            <div class=\"text-center\">\n              <h3>Nisan Sabag</h3>\n            </div>\n\n            <div class=\"text-center\">\n              <a href=\"https://github.com/nisan250/\">www.github.com/nisan250/</a>\n            </div>\n          </div>\n        </div>\n      </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -256,7 +273,7 @@ module.exports = "<div class=\"animatedroute2\">\n    <!-- <ngx-loading [show]=\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".card {\n  margin-top: 30px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9EOlxcYXBwc1xcbXktYXBwL3NyY1xcYXBwXFxob21lXFxob21lLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsaUJBQWdCLEVBQ2pCIiwiZmlsZSI6InNyYy9hcHAvaG9tZS9ob21lLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNhcmQge1xyXG4gIG1hcmdpbi10b3A6IDMwcHg7XHJcbn1cclxuIl19 */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2hvbWUvaG9tZS5jb21wb25lbnQuc2NzcyJ9 */"
 
 /***/ }),
 
@@ -335,13 +352,17 @@ var MessageComponent = /** @class */ (function () {
         this.router = router;
     }
     MessageComponent.prototype.close = function () {
-        // Close the popup.
+        this.router.navigate([{ outlets: { popup: null } }]);
+        this.messageService.isDisplayed = false;
     };
     MessageComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            template: "\n        <div class=\"row\">\n            <h4 class=\"col-md-10\">Message Log</h4>\n            <span class=\"col-md-2\">\n                <a class=\"btn btn-default\"\n                    (click)=\"close()\">\n                    x\n                </a>\n            </span>\n        </div>\n        <div *ngFor=\"let message of messageService.messages; let i=index\">\n            <div *ngIf=\"i<10\" class=\"message-row\">\n                {{ message }}\n            </div>\n        </div>\n    ",
+            template: "\n    <div class=\"card animatedroute\">\n      <div class=\"d-flex card-header\">\n        <h5 class=\"flex-fill\">Message Log</h5>\n        <span class=\"\">\n            <a class=\"btn btn-default btn-sm\"\n                (click)=\"close()\">\n                x\n            </a>\n        </span>\n      </div>\n      <div class=\"card-body\" >\n        <div class=\"message-elm\" *ngFor=\"let message of messageService.messages; let i=index\">\n          <div *ngIf=\"i<10\" class=\"message-row\">\n            {{ message }}\n          </div>\n        </div>\n        <div *ngIf=\"messageService.messages.length < 1\" class=\"message-row\">\n          <div>No messages yet.</div>\n          <div>Log-In to see new message.</div>\n      </div>\n      </div>\n    </div>\n\n    ",
             styles: [
-                '.message-row { margin-bottom: 10px }'
+                '.message-row { margin-bottom: 10px }',
+                '.btn-default { border: 1px solid #ccc; }',
+                '.message-row { border-bottom: 1px solid rgba(223,215,202,0.75) }',
+                '.message-row:last-child { border-bottom: none }'
             ]
         }),
         __metadata("design:paramtypes", [_messages_message_service__WEBPACK_IMPORTED_MODULE_2__["MessageService"],
@@ -368,6 +389,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/shared.module */ "./src/app/shared/shared.module.ts");
 /* harmony import */ var _message_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message.component */ "./src/app/messages/message.component.ts");
 /* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./message.service */ "./src/app/messages/message.service.ts");
+/* harmony import */ var _messages_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./messages-routing.module */ "./src/app/messages/messages-routing.module.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -378,13 +400,15 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var MessageModule = /** @class */ (function () {
     function MessageModule() {
     }
     MessageModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             imports: [
-                _shared_shared_module__WEBPACK_IMPORTED_MODULE_1__["SharedModule"]
+                _shared_shared_module__WEBPACK_IMPORTED_MODULE_1__["SharedModule"],
+                _messages_routing_module__WEBPACK_IMPORTED_MODULE_4__["MessagesRoutingModule"]
             ],
             declarations: [
                 _message_component__WEBPACK_IMPORTED_MODULE_2__["MessageComponent"]
@@ -422,6 +446,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var MessageService = /** @class */ (function () {
     function MessageService() {
         this.messages = [];
+        this.isDisplayed = false;
     }
     MessageService.prototype.addMessage = function (message) {
         var currentDate = new Date();
@@ -431,6 +456,51 @@ var MessageService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])()
     ], MessageService);
     return MessageService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/messages/messages-routing.module.ts":
+/*!*****************************************************!*\
+  !*** ./src/app/messages/messages-routing.module.ts ***!
+  \*****************************************************/
+/*! exports provided: MessagesRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessagesRoutingModule", function() { return MessagesRoutingModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _message_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message.component */ "./src/app/messages/message.component.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var routes = [
+    { path: 'messages', component: _message_component__WEBPACK_IMPORTED_MODULE_2__["MessageComponent"], outlet: 'popup' }
+];
+var MessagesRoutingModule = /** @class */ (function () {
+    function MessagesRoutingModule() {
+    }
+    MessagesRoutingModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            imports: [
+                _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forChild(routes)
+            ],
+            exports: [
+                _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]
+            ]
+        })
+    ], MessagesRoutingModule);
+    return MessagesRoutingModule;
 }());
 
 
@@ -997,7 +1067,7 @@ module.exports = "thead {\n  color: #337AB7;\n}\n.row {\n  padding-bottom: 1.25r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <ngx-loading [show]=\"loading\"></ngx-loading> -->\n<div class=\"card animatedroute\">\n  <div class=\"card-header\">\n    {{pageTitle}}\n  </div>\n\n  <div class=\"card-body\">\n    <div class=\"row\">\n      <div class=\"col-md-2\">Filter by:</div>\n      <div class=\"col-md-4\">\n        <input type=\"text\"\n               [(ngModel)]=\"listFilter\" />\n      </div>\n    </div>\n    <div class=\"row\"\n         *ngIf=\"listFilter\">\n      <div class=\"col-md-6\">\n        <h4>Filtered by: {{listFilter}}</h4>\n      </div>\n    </div>\n\n    <div class=\"table-responsive\">\n      <table class=\"table mb-0\"\n             *ngIf=\"products && products.length\">\n        <thead>\n          <tr>\n            <th></th>\n            <th>Product</th>\n            <th>Code</th>\n            <th>Available</th>\n            <th>Price</th>\n            <th>5 Star Rating</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let product of filteredProducts\">\n            <td class=\"imageBlock\">\n              <img *ngIf=\"product.imageUrl\"\n                   [src]=\"product.imageUrl\"\n                   [title]=\"product.productName\"\n                   [style.width.px]=\"imageWidth\"\n                   [style.margin.px]=\"imageMargin\">\n            </td>\n            <td>\n              <a [routerLink]=\"['/products', product.id]\"\n                  [queryParams]=\"{filterBy: listFilter}\">\n                {{ product.productName }}\n              </a>\n            </td>\n            <td>{{ product.productCode }}</td>\n            <td>{{ product.releaseDate }}</td>\n            <td>{{ product.price | currency:\"USD\":\"symbol\":\"1.2-2\" }}</td>\n            <td>\n              <wn-star [rating]=\"product.starRating\">\n              </wn-star>\n            </td>\n            <td>\n              <button class=\"btn btn-outline-primary btn-sm\"\n                      [routerLink]=\"['/products', product.id, 'edit']\"\n                      [queryParams]=\"{filterBy: listFilter}\">\n                Edit\n              </button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n\n  </div>\n</div>\n\n<div *ngIf=\"errorMessage\"\n     class=\"alert alert-danger\">\n  Error: {{ errorMessage }}\n</div>\n"
+module.exports = "<!-- <ngx-loading [show]=\"loading\"></ngx-loading> -->\n<div class=\"card animatedroute\">\n  <div class=\"card-header\">\n    {{pageTitle}}\n  </div>\n\n  <div class=\"card-body\">\n    <div class=\"row\">\n      <div class=\"col-md-2\">Filter by:</div>\n      <div class=\"col-md-4\">\n        <input type=\"text\"\n               [(ngModel)]=\"listFilter\" />\n      </div>\n    </div>\n    <div class=\"row\"\n         *ngIf=\"listFilter\">\n      <div class=\"col-md-6\">\n        <h4>Filtered by: {{listFilter}}</h4>\n      </div>\n    </div>\n\n    <div class=\"table-responsive\">\n      <table class=\"table mb-0\"\n             *ngIf=\"products && products.length\">\n        <thead>\n          <tr>\n            <th></th>\n            <th>Product</th>\n            <th>Code</th>\n            <th>Available</th>\n            <th>Price</th>\n            <th>5 Star Rating</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let product of filteredProducts\">\n            <td class=\"imageBlock\">\n              <img *ngIf=\"product.imageUrl\"\n                   [src]=\"product.imageUrl\"\n                   [title]=\"product.productName\"\n                   [style.width.px]=\"imageWidth\"\n                   [style.margin.px]=\"imageMargin\">\n            </td>\n            <td>\n              <a [routerLink]=\"['/products', product.id]\"\n                  [queryParams]=\"{filterBy: listFilter}\">\n                {{ product.productName }}\n              </a>\n            </td>\n            <td>{{ product.productCode }}</td>\n            <td>{{ product.releaseDate }}</td>\n            <td>{{ product.price | currency:\"USD\":\"symbol\":\"1.2-2\" }}</td>\n            <td>\n              <wn-star [rating]=\"product.starRating\">\n              </wn-star>\n            </td>\n            <td>\n              <button class=\"btn btn-outline-primary btn-sm\"\n                      [routerLink]=\"['/products', product.id, 'edit']\"\n                      [queryParams]=\"{filterBy: listFilter}\">\n                Edit\n              </button>\n         <!-- <button class=\"btn btn-outline-primary btn-sm\"\n                [routerLink]=\"['/products', product.id, 'edit',\n                { outlets: { popup: ['summery', product.id]}]\"\n                [queryParams]=\"{filterBy: listFilter}\">\n                Edit\n              </button> -->\n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n\n  </div>\n</div>\n\n<div *ngIf=\"errorMessage\"\n     class=\"alert alert-danger\">\n  Error: {{ errorMessage }}\n</div>\n"
 
 /***/ }),
 
@@ -1786,7 +1856,7 @@ var AuthService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card animatedroute2\">\n  <div class=\"card-header\">\n      {{pageTitle}}\n  </div>\n\n  <div class=\"card-body\">\n      <form\n            novalidate\n            (ngSubmit)=\"login(loginForm)\"\n            #loginForm=\"ngForm\"\n            autocomplete=\"off\" >\n          <fieldset>\n              <div class=\"form-group\"\n                   [ngClass]=\"{'has-error': (userNameVar.touched ||\n                                             userNameVar.dirty) &&\n                                             !userNameVar.valid }\">\n                  <label class=\"col-md-2\"\n                         for=\"userNameId\">User Name</label>\n\n                  <div class=\"col-md-8\">\n                      <input class=\"form-control\"\n                              id=\"userNameId\"\n                              type=\"text\"\n                              placeholder=\"User Name (required)\"\n                              required\n                              (ngModel) = \"userName\"\n                              name=\"userName\"\n                              #userNameVar=\"ngModel\" />\n                      <span class=\"text-danger\" *ngIf=\"(userNameVar.touched ||\n                                                       userNameVar.dirty) &&\n                                                       userNameVar.errors\">\n                          <span *ngIf=\"userNameVar.errors.required\">\n                              User name is required.\n                          </span>\n                      </span>\n                  </div>\n              </div>\n\n              <div class=\"form-group\"\n                   [ngClass]=\"{'has-error': (passwordVar.touched ||\n                                             passwordVar.dirty) &&\n                                             !passwordVar.valid }\">\n                  <label class=\"col-md-2\" for=\"passwordId\">Password</label>\n\n                  <div class=\"col-md-8\">\n                      <input class=\"form-control\"\n                              id=\"passwordId\"\n                              type=\"password\"\n                              placeholder=\"Password (required)\"\n                              required\n                              (ngModel) = \"password\"\n                              name=\"password\"\n                              #passwordVar=\"ngModel\" />\n                      <span class=\"text-danger\" *ngIf=\"(passwordVar.touched ||\n                                                       passwordVar.dirty) &&\n                                                       passwordVar.errors\">\n                          <span *ngIf=\"passwordVar.errors.required\">\n                              Password is required.\n                          </span>\n                      </span>\n                  </div>\n              </div>\n\n              <div class=\"form-group\">\n                  <div class=\"col-md-4 col-md-offset-2\">\n                      <span>\n                          <button class=\"btn btn-primary\"\n                                  type=\"submit\"\n                                  style=\"width:80px;margin-right:10px\"\n                                  [disabled]=\"!loginForm.valid\">\n                              Log In\n                          </button>\n                      </span>\n                      <span>\n                          <a [routerLink]=\"['/home']\" class=\"btn btn-default\">\n                              Cancel\n                          </a>\n                      </span>\n                   </div>\n              </div>\n          </fieldset>\n      </form>\n      <div class=\"has-error\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"card animatedroute\">\n  <div class=\"card-header\">\n      {{pageTitle}}\n  </div>\n\n  <div class=\"card-body\">\n      <form\n            novalidate\n            (ngSubmit)=\"login(loginForm)\"\n            #loginForm=\"ngForm\"\n            autocomplete=\"off\" >\n          <fieldset>\n              <div class=\"form-group\"\n                   [ngClass]=\"{'has-error': (userNameVar.touched ||\n                                             userNameVar.dirty) &&\n                                             !userNameVar.valid }\">\n                  <label class=\"col-md-2\"\n                         for=\"userNameId\">User Name</label>\n\n                  <div class=\"col-md-8\">\n                      <input class=\"form-control\"\n                              id=\"userNameId\"\n                              type=\"text\"\n                              placeholder=\"User Name (required)\"\n                              required\n                              (ngModel) = \"userName\"\n                              name=\"userName\"\n                              #userNameVar=\"ngModel\" />\n                      <span class=\"text-danger\" *ngIf=\"(userNameVar.touched ||\n                                                       userNameVar.dirty) &&\n                                                       userNameVar.errors\">\n                          <span *ngIf=\"userNameVar.errors.required\">\n                              User name is required.\n                          </span>\n                      </span>\n                  </div>\n              </div>\n\n              <div class=\"form-group\"\n                   [ngClass]=\"{'has-error': (passwordVar.touched ||\n                                             passwordVar.dirty) &&\n                                             !passwordVar.valid }\">\n                  <label class=\"col-md-2\" for=\"passwordId\">Password</label>\n\n                  <div class=\"col-md-8\">\n                      <input class=\"form-control\"\n                              id=\"passwordId\"\n                              type=\"password\"\n                              placeholder=\"Password (required)\"\n                              required\n                              (ngModel) = \"password\"\n                              name=\"password\"\n                              #passwordVar=\"ngModel\" />\n                      <span class=\"text-danger\" *ngIf=\"(passwordVar.touched ||\n                                                       passwordVar.dirty) &&\n                                                       passwordVar.errors\">\n                          <span *ngIf=\"passwordVar.errors.required\">\n                              Password is required.\n                          </span>\n                      </span>\n                  </div>\n              </div>\n\n              <div class=\"form-group\">\n                  <div class=\"col-md-4 col-md-offset-2\">\n                      <span>\n                          <button class=\"btn btn-primary\"\n                                  type=\"submit\"\n                                  style=\"width:80px;margin-right:10px\"\n                                  [disabled]=\"!loginForm.valid\">\n                              Log In\n                          </button>\n                      </span>\n                      <span>\n                          <a [routerLink]=\"['/home']\" class=\"btn btn-default\">\n                              Cancel\n                          </a>\n                      </span>\n                   </div>\n              </div>\n          </fieldset>\n      </form>\n      <div class=\"has-error\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n  </div>\n\n</div>\n"
 
 /***/ }),
 

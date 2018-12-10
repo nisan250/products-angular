@@ -11,3 +11,63 @@
   cursor: pointer;
 }
 
+.welcome-user {
+  .nav-link {
+    cursor: default;
+    color: #63ad5a;
+    &:hover {
+      color: #63ad5a;
+    }
+  }
+}
+
+.nav-link.welcome-mobile {
+  text-align: center;
+  color: #63ad5a;
+
+  &:hover {
+    color: #63ad5a;
+    cursor: default;
+  }
+}
+
+.primary-route{
+  padding: 0 10px;
+}
+.secondary-route {
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+
+@media (max-width: 991px) {
+  .routes-wrapper {
+    flex-direction: column-reverse !important;
+  }
+}
+// // .flex-routes-layout {
+// //   flex-direction: column-reverse;
+// // }
+// @media (max-width: 768px) {
+//   // .flex-row {
+//   //   flex-direction: column !important;
+//   // }
+//   // .flex-row-child {
+//   //   width: 100%;
+//   // }
+// // .flex-routes-layout {
+// //   flex-direction: column-reverse;
+
+// //   .flex-routes-layout-child {
+// //     flex: 1;
+// //     max-width: 100%;
+
+// //       &:last-child {
+// //         margin: 10px 0;
+// //       }
+// //     }
+// //   }
+
+// //   .flex-routes-layout-child:last-child {
+// //     margin: 0 0 16px 0;
+// //   }
+// }

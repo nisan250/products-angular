@@ -1,9 +1,8 @@
 <div class="spinner-bg" *ngIf="loading">
     <span class="fa fa-spinner"></span>
 </div>
-<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
-  <a class="navbar-brand"  [routerLink]="['/']" >{{title}}</a><!--[routerLinkActive]="['link-active']"-->
-
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary animatedroute2">
+  <div class="navbar-brand">{{title}}</div><!--[routerLink]="['/']" [routerLinkActive]="['link-active']"-->
 
   <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
     <span class="navbar-toggler-icon"></span>
@@ -11,6 +10,9 @@
 
   <div class="collapse navbar-collapse xnavbar-nav xnav" [ngClass]="{ 'show': navbarOpen }">
     <ul class="navbar-nav mr-auto">
+      <li class='nav-item welcome-user' *ngIf="authService.isLoggedIn()" class="d-lg-none">
+        <a class='nav-link welcome-mobile'>Welcome {{ authService.currentUser.userName }}</a>
+      </li>
       <li class='nav-item'><a class='nav-link' routerLinkActive='active'
         [routerLink]="['/home']" (click)="toggleNavbar()">Home</a>
       </li>
@@ -22,8 +24,14 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-        <li class='nav-item' *ngIf="authService.isLoggedIn()"><!-- class='nav-item'-->
-          <a class='nav-link'>Welcome {{ authService.currentUser.userName }}</a><!--class='nav-link'-->
+        <li class='nav-item welcome-user d-none d-lg-block' *ngIf="authService.isLoggedIn()">
+          <a class='nav-link'>Welcome {{ authService.currentUser.userName }}</a>
+        </li>
+        <li class='nav-item'>
+            <a class='nav-link' *ngIf="!messageService.isDisplayed" (click)="displayMessages()">Show Messages</a><!--[routerLink]="[{ outlets: { popup: ['messages'] }}]"-->
+        </li>
+        <li class='nav-item'>
+            <a class='nav-link' *ngIf="messageService.isDisplayed" (click)="hideMessages()">Hide Messages</a>
         </li>
         <li class='nav-item' *ngIf="!authService.isLoggedIn()">
           <a class='nav-link' routerLinkActive='active' [routerLink]="['/login']" (click)="toggleNavbar()">Log In</a>
@@ -36,5 +44,12 @@
 </div>
 
 <div class='container content-with-fixed-top'>
-  <router-outlet></router-outlet>
+  <div class="row routes-wrapper">
+      <div class="primary-route flex-fill">
+          <router-outlet></router-outlet>
+        </div>
+        <div class="secondary-route">
+            <router-outlet name="popup"></router-outlet>
+        </div>
+  </div>
 </div>

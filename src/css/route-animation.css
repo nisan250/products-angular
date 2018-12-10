@@ -10,6 +10,41 @@ li {
   cursor: pointer;
 }
 
+
+/* .primary-route{
+  animation-duration: .5s;
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-fill-mode: forwards;
+  transition: transform .5s ease;
+}
+.secondary-route {
+  animation-duration: .5s;
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-fill-mode: forwards;
+  transition: transform .5s ease;
+} */
+/* .primary-route{
+  animation-duration: .5s;
+  animation-name: slideIn;
+  animation-fill-mode: forwards;
+  transition: transform .5s ease;
+}
+.secondary-route {
+  animation-duration: .5s;
+  animation-name: slideIn;
+  animation-fill-mode: forwards;
+  transition: transform .5s ease;
+} */
+/* .someClass {
+  animation-duration: .5s;
+  animation-name: slideIn;
+  animation-fill-mode: forwards;
+  transition: transform .5s ease;
+} */
+
+
 /* Fade transition */
 wn-root div.animatedroute2 {
   animation-duration: .5s;
