@@ -11,13 +11,13 @@ import {
   ProductResolverService,
   ProductEditGuard
 } from './index';
-import { NgxLoadingModule } from 'ngx-loading';
+// import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   imports: [
     SharedModule,
     ReactiveFormsModule,
-    NgxLoadingModule.forRoot({}),
+    // NgxLoadingModule.forRoot({}),
     ProductRoutingModule
   ],
   declarations: [

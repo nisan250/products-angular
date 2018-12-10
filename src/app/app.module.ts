@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 
 // Third Party
-import { NgxLoadingModule } from 'ngx-loading';
+// import { NgxLoadingModule } from 'ngx-loading';
 
 // Feature Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -27,12 +27,12 @@ import { MessageModule } from './messages/message.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    NgxLoadingModule.forRoot({}),
+    // NgxLoadingModule.forRoot({}),
     InMemoryWebApiModule.forRoot(ProductData, { delay: 1000 } ),
+    // ProductModule,
     UserModule,
-    ProductModule,
     MessageModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

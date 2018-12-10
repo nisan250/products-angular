@@ -5,14 +5,15 @@ import { ProductDetailComponent } from './product-detail.component';
 import { ProductEditComponent } from './product-edit.component';
 import { ProductEditGuard } from './product-edit.guard';
 import { ProductResolverService } from './product-resolver.service';
-import { AuthGuardService } from '../user/auth-guard.service';
+// import { AuthGuardService } from '../user/auth-guard.service';
 
 const routes: Routes = [
-{
-  path: 'products',
-  canActivate: [ AuthGuardService ],
-  children: [
-    { path: '',
+// {
+  // path: 'products',
+  // canActivate: [ AuthGuardService ],
+  // children: [
+    {
+      path: '',
       component: ProductListComponent },
     {
       path: ':id',
@@ -25,8 +26,10 @@ const routes: Routes = [
       component: ProductEditComponent,
       resolve: { product: ProductResolverService}
     }
-  ]
-}
+//   ]
+// }
+
+
   // { path: 'products', component: ProductListComponent },
   // {
   //   path: 'products/:id',
