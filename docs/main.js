@@ -50,6 +50,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
 /* harmony import */ var _page_not_found_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./page-not-found.component */ "./src/app/page-not-found.component.ts");
 /* harmony import */ var _user_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user/auth-guard.service */ "./src/app/user/auth-guard.service.ts");
+/* harmony import */ var _selective_strategy_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./selective-strategy.service */ "./src/app/selective-strategy.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61,12 +62,18 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
     // { path: 'products', canActivate: [ AuthGuardService ], loadChildren: 'src/app/products/product.module#ProductModule'},
     // require the log-in before loading the product module.
     // { path: 'products', canLoad: [ AuthGuardService ], loadChildren: 'src/app/products/product.module#ProductModule'},
     // again using canActivate coz canLoad blocks preload the module with PreloadAllModules (makes sense)
-    { path: 'products', canActivate: [_user_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]], loadChildren: 'src/app/products/product.module#ProductModule' },
+    {
+        path: 'products',
+        canActivate: [_user_auth_guard_service__WEBPACK_IMPORTED_MODULE_4__["AuthGuardService"]],
+        data: { preload: true },
+        loadChildren: 'src/app/products/product.module#ProductModule'
+    },
     { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_2__["HomeComponent"] },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: '**', component: _page_not_found_component__WEBPACK_IMPORTED_MODULE_3__["PageNotFoundComponent"] },
@@ -78,9 +85,14 @@ var AppRoutingModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes, {
                     // enableTracing: true,
-                    preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_1__["PreloadAllModules"]
+                    preloadingStrategy: _selective_strategy_service__WEBPACK_IMPORTED_MODULE_5__["SelectiveStrategyService"]
                 })],
-            exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
+            exports: [
+                _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]
+            ],
+            providers: [
+                _selective_strategy_service__WEBPACK_IMPORTED_MODULE_5__["SelectiveStrategyService"]
+            ]
         })
     ], AppRoutingModule);
     return AppRoutingModule;
@@ -629,6 +641,47 @@ var ProductData = /** @class */ (function () {
         return { products: products };
     };
     return ProductData;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/selective-strategy.service.ts":
+/*!***********************************************!*\
+  !*** ./src/app/selective-strategy.service.ts ***!
+  \***********************************************/
+/*! exports provided: SelectiveStrategyService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SelectiveStrategyService", function() { return SelectiveStrategyService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+var SelectiveStrategyService = /** @class */ (function () {
+    function SelectiveStrategyService() {
+    }
+    SelectiveStrategyService.prototype.preload = function (route, load) {
+        if (route.data && route.data['preload']) {
+            return load();
+        }
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(null);
+    };
+    SelectiveStrategyService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        })
+    ], SelectiveStrategyService);
+    return SelectiveStrategyService;
 }());
 
 
