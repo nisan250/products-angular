@@ -85,6 +85,7 @@ var AppRoutingModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes, {
                     // enableTracing: true,
+                    // preloadingStrategy: PreloadAllModules,
                     preloadingStrategy: _selective_strategy_service__WEBPACK_IMPORTED_MODULE_5__["SelectiveStrategyService"]
                 })],
             exports: [
@@ -138,6 +139,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user/auth.service */ "./src/app/user/auth.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _messages_message_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./messages/message.service */ "./src/app/messages/message.service.ts");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -151,12 +153,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(authService, router, messageService) {
+    function AppComponent(authService, router, messageService, angularVersionTitle) {
         var _this = this;
         this.authService = authService;
         this.router = router;
         this.messageService = messageService;
+        this.angularVersionTitle = angularVersionTitle;
         this.title = 'Products-NG';
         this.navbarOpen = false;
         this.loading = true;
@@ -164,6 +168,9 @@ var AppComponent = /** @class */ (function () {
             _this.handleRouterEvent(routerEvent);
         });
     }
+    AppComponent.prototype.ngOnInit = function () {
+        this.angularVersionTitle.setTitle(this.title + "  (ver " + _angular_core__WEBPACK_IMPORTED_MODULE_0__["VERSION"].full + ")");
+    };
     AppComponent.prototype.handleRouterEvent = function (routerEvent) {
         if (routerEvent instanceof _angular_router__WEBPACK_IMPORTED_MODULE_2__["NavigationStart"]) {
             this.loading = true;
@@ -203,7 +210,10 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")]
         }),
-        __metadata("design:paramtypes", [_user_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _messages_message_service__WEBPACK_IMPORTED_MODULE_3__["MessageService"]])
+        __metadata("design:paramtypes", [_user_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _messages_message_service__WEBPACK_IMPORTED_MODULE_3__["MessageService"],
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__["Title"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -252,6 +262,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 // import { NgxLoadingModule } from 'ngx-loading';
 // Feature Modules
 
+// import { ProductModule } from './products/product.module';
 
 
 var AppModule = /** @class */ (function () {
@@ -267,14 +278,11 @@ var AppModule = /** @class */ (function () {
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"],
-                // NgxLoadingModule.forRoot({}),
                 angular_in_memory_web_api__WEBPACK_IMPORTED_MODULE_3__["InMemoryWebApiModule"].forRoot(_products_product_data__WEBPACK_IMPORTED_MODULE_4__["ProductData"], { delay: 1000 }),
-                // ProductModule,
                 _user_user_module__WEBPACK_IMPORTED_MODULE_9__["UserModule"],
                 _messages_message_module__WEBPACK_IMPORTED_MODULE_10__["MessageModule"],
-                _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"]
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"],
             ],
-            providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
         })
     ], AppModule);
