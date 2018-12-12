@@ -1,23 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, VERSION  } from '@angular/core';
 import { AuthService } from './user/auth.service';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { BrowserPlatformLocation } from '@angular/platform-browser/src/browser/location/browser_platform_location';
 import { MessageService } from './messages/message.service';
+import { Title } from '@angular/platform-browser';
+
 @Component({
   selector: 'wn-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Products-NG';
   navbarOpen = false;
   loading = true;
 
-  constructor(private authService: AuthService, private router: Router, private messageService: MessageService) {
+  constructor(private authService: AuthService,
+    private router: Router,
+    private messageService: MessageService,
+    private angularVersionTitle: Title
+    ) {
     router.events.subscribe((routerEvent: Event) => {
       this.handleRouterEvent(routerEvent);
     });
    }
+
+  ngOnInit() {
+    this.angularVersionTitle.setTitle(`${this.title}  (ver ${VERSION.full})`);
+  }
 
   handleRouterEvent(routerEvent: Event): void {
     if (routerEvent instanceof NavigationStart) {

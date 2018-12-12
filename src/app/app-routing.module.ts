@@ -25,6 +25,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes,
       {
         // enableTracing: true,
+        // preloadingStrategy: PreloadAllModules,
         preloadingStrategy: SelectiveStrategyService
       }
   )],
