@@ -28,6 +28,7 @@ export class ProductListComponent implements OnInit {
 
   filteredProducts: Product[] = [];
   products: Product[] = [];
+  productss: Product[];
 
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
@@ -40,18 +41,26 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-      this.productService.getProducts().subscribe(
-        products => {
-          this.products = products;
-          this.listFilter = this.route.snapshot.queryParams['filterBy'] || '';
-          if (this.listFilter === '') {
-            this.filteredProducts = this.products;
-          }
 
-          this.loading = false;
-        },
-        error => this.errorMessage = <any>error
-      );
+    this.products = this.route.snapshot.data['products'];
+    this.listFilter = this.route.snapshot.queryParams['filterBy'] || '';
+    if (this.listFilter === '') {
+      this.filteredProducts = this.products;
+    }
+
+    this.loading = false;
+    // this.productService.getProducts().subscribe(
+    //   products => {
+    //     this.products = products;
+    //     this.listFilter = this.route.snapshot.queryParams['filterBy'] || '';
+    //     if (this.listFilter === '') {
+    //       this.filteredProducts = this.products;
+    //     }
+
+    //     this.loading = false;
+    //   },
+    //   error => this.errorMessage = <any>error
+    // );
 
   }
 }

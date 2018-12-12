@@ -5,6 +5,7 @@ import { ProductDetailComponent } from './product-detail.component';
 import { ProductEditComponent } from './product-edit.component';
 import { ProductEditGuard } from './product-edit.guard';
 import { ProductResolverService } from './product-resolver.service';
+import { ProductsResolverService } from './products-resolver.service';
 // import { AuthGuardService } from '../user/auth-guard.service';
 
 const routes: Routes = [
@@ -14,7 +15,9 @@ const routes: Routes = [
   // children: [
     {
       path: '',
-      component: ProductListComponent },
+      component: ProductListComponent,
+      resolve: { products: ProductsResolverService }
+    },
     {
       path: ':id',
       component: ProductDetailComponent,

@@ -512,16 +512,24 @@ var ProductListComponent = /** @class */ (function () {
         });
     };
     ProductListComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.loading = true;
-        this.productService.getProducts().subscribe(function (products) {
-            _this.products = products;
-            _this.listFilter = _this.route.snapshot.queryParams['filterBy'] || '';
-            if (_this.listFilter === '') {
-                _this.filteredProducts = _this.products;
-            }
-            _this.loading = false;
-        }, function (error) { return _this.errorMessage = error; });
+        this.products = this.route.snapshot.data['products'];
+        this.listFilter = this.route.snapshot.queryParams['filterBy'] || '';
+        if (this.listFilter === '') {
+            this.filteredProducts = this.products;
+        }
+        this.loading = false;
+        // this.productService.getProducts().subscribe(
+        //   products => {
+        //     this.products = products;
+        //     this.listFilter = this.route.snapshot.queryParams['filterBy'] || '';
+        //     if (this.listFilter === '') {
+        //       this.filteredProducts = this.products;
+        //     }
+        //     this.loading = false;
+        //   },
+        //   error => this.errorMessage = <any>error
+        // );
     };
     ProductListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -622,12 +630,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _product_edit_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./product-edit.component */ "./src/app/products/product-edit.component.ts");
 /* harmony import */ var _product_edit_guard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./product-edit.guard */ "./src/app/products/product-edit.guard.ts");
 /* harmony import */ var _product_resolver_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./product-resolver.service */ "./src/app/products/product-resolver.service.ts");
+/* harmony import */ var _products_resolver_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./products-resolver.service */ "./src/app/products/products-resolver.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -643,7 +653,8 @@ var routes = [
     // children: [
     {
         path: '',
-        component: _product_list_component__WEBPACK_IMPORTED_MODULE_2__["ProductListComponent"]
+        component: _product_list_component__WEBPACK_IMPORTED_MODULE_2__["ProductListComponent"],
+        resolve: { products: _products_resolver_service__WEBPACK_IMPORTED_MODULE_7__["ProductsResolverService"] }
     },
     {
         path: ':id',
@@ -697,17 +708,19 @@ var ProductRoutingModule = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductModule", function() { return ProductModule; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _product_routing_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./product-routing.module */ "./src/app/products/product-routing.module.ts");
-/* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/shared.module */ "./src/app/shared/shared.module.ts");
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./index */ "./src/app/products/index.ts");
+/* harmony import */ var _products_resolver_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./products-resolver.service */ "./src/app/products/products-resolver.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _product_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./product-routing.module */ "./src/app/products/product-routing.module.ts");
+/* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/shared.module */ "./src/app/shared/shared.module.ts");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./index */ "./src/app/products/index.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -719,19 +732,19 @@ var ProductModule = /** @class */ (function () {
     function ProductModule() {
     }
     ProductModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             imports: [
-                _shared_shared_module__WEBPACK_IMPORTED_MODULE_3__["SharedModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_1__["ReactiveFormsModule"],
+                _shared_shared_module__WEBPACK_IMPORTED_MODULE_4__["SharedModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
                 // NgxLoadingModule.forRoot({}),
-                _product_routing_module__WEBPACK_IMPORTED_MODULE_2__["ProductRoutingModule"]
+                _product_routing_module__WEBPACK_IMPORTED_MODULE_3__["ProductRoutingModule"]
             ],
             declarations: [
-                _index__WEBPACK_IMPORTED_MODULE_4__["ProductListComponent"],
-                _index__WEBPACK_IMPORTED_MODULE_4__["ProductDetailComponent"],
-                _index__WEBPACK_IMPORTED_MODULE_4__["ProductEditComponent"]
+                _index__WEBPACK_IMPORTED_MODULE_5__["ProductListComponent"],
+                _index__WEBPACK_IMPORTED_MODULE_5__["ProductDetailComponent"],
+                _index__WEBPACK_IMPORTED_MODULE_5__["ProductEditComponent"]
             ],
-            providers: [_index__WEBPACK_IMPORTED_MODULE_4__["ProductResolverService"], _index__WEBPACK_IMPORTED_MODULE_4__["ProductEditGuard"]]
+            providers: [_index__WEBPACK_IMPORTED_MODULE_5__["ProductResolverService"], _index__WEBPACK_IMPORTED_MODULE_5__["ProductEditGuard"], _products_resolver_service__WEBPACK_IMPORTED_MODULE_0__["ProductsResolverService"]]
         })
     ], ProductModule);
     return ProductModule;
@@ -842,6 +855,73 @@ var ProductService = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], ProductService);
     return ProductService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/products/products-resolver.service.ts":
+/*!*******************************************************!*\
+  !*** ./src/app/products/products-resolver.service.ts ***!
+  \*******************************************************/
+/*! exports provided: ProductsResolverService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductsResolverService", function() { return ProductsResolverService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./product.service */ "./src/app/products/product.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+// import { map, catchError } from 'rxjs/operators';
+
+var ProductsResolverService = /** @class */ (function () {
+    function ProductsResolverService(productService, router) {
+        this.productService = productService;
+        this.router = router;
+    }
+    ProductsResolverService.prototype.resolve = function (route, state) {
+        return this.productService.getProducts();
+        // const id = route.params['id'];
+        // if (isNaN(id)) {
+        //   console.log(`product id is not a number: ${id}`);
+        //   this.router.navigate(['/products']);
+        //   return of(null);
+        // }
+        // return this.productService.getProduct(+id)
+        //   .pipe(map(product => {
+        //     if (product) {
+        //       return product;
+        //     }
+        //     console.log(`product not found: ${id}`);
+        //     this.router.navigate(['/products']);
+        //     return null;
+        //   }))
+        //   .pipe(catchError(error => {
+        //     console.log(`rerieval error: ${error}`);
+        //     this.router.navigate(['/products']);
+        //     return Observable.of(null);
+        //   }));
+    };
+    ProductsResolverService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_product_service__WEBPACK_IMPORTED_MODULE_2__["ProductService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+    ], ProductsResolverService);
+    return ProductsResolverService;
 }());
 
 

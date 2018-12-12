@@ -1,3 +1,4 @@
+import { ProductsResolverService } from './products-resolver.service';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductRoutingModule } from './product-routing.module';
@@ -25,6 +26,6 @@ import {
     ProductDetailComponent,
     ProductEditComponent
   ],
-  providers: [ProductResolverService, ProductEditGuard]
+  providers: [ProductResolverService, ProductEditGuard, ProductsResolverService]
 })
 export class ProductModule { }
